@@ -2,8 +2,9 @@ import { View, Text, ActivityIndicator, ScrollView } from 'react-native'
 import React from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useMovies } from '@/presentation/hooks/useMovies'
-import MainSlideShow from '@/presentation/hooks/components/movies/MainSlideShow'
-import MovieHorizontalList from '@/presentation/hooks/components/movies/MovieHorizontalList'
+import MainSlideShow from '@/presentation/components/movies/MainSlideShow'
+import MovieHorizontalList from '@/presentation/components/movies/MovieHorizontalList'
+
 
 const HomeScreen = () => {
     const safeArea = useSafeAreaInsets();
@@ -31,21 +32,22 @@ const HomeScreen = () => {
                 />
                 <MovieHorizontalList
                     title='Populares'
-                    movies={popularQuery.data ?? []}
+                    movies={popularQuery.data?.pages.flat() ?? []}
                     className='mb-5'
+                    loadNextPage={popularQuery.fetchNextPage}
                 />
                 <MovieHorizontalList
                     title='Mejor Calificadas'
-                    movies={topRatedQuery.data ?? []}
+                    movies={topRatedQuery.data?.pages.flat() ?? []}
                     className='mb-5'
+                    loadNextPage={topRatedQuery.fetchNextPage}
                 />
                 <MovieHorizontalList
                     title='Próximamente'
-                    movies={upcomingQuery.data ?? []}
+                    movies={upcomingQuery.data?.pages.flat() ?? []}
+                    loadNextPage={upcomingQuery.fetchNextPage}
                 />
-                <MovieHorizontalList
-                    movies={upcomingQuery.data ?? []}
-                />
+
             </View>
         </ScrollView>
     )
