@@ -12,7 +12,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 const queryClient = new QueryClient();
 
 const RootLayout = () => {
-  Appearance.setColorScheme('light');
+  Appearance.setColorScheme('dark');
   return (
     <GestureHandlerRootView>
       <QueryClientProvider client={queryClient}>
